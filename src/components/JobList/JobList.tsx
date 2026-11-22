@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { Loader, Pagination } from "@mantine/core";
-import { useSearchParams } from "react-router-dom";
+import { useMatch, useSearchParams } from "react-router-dom";
 import { useTypedDispatch, useTypedSelector } from "../../hooks/redux";
 import { fetchJobs } from "../../store/thunks/JobsThunks";
 import { setPage } from "../../store/reducers/JobsSlice";
@@ -10,9 +10,10 @@ import Style from "./JobList.style.module.scss";
 export const JobList = () => {
   const dispatch = useTypedDispatch();
   const [searchParams] = useSearchParams();
+  const petersburgMatch = useMatch("/vacancies/petersburg");
 
+  const city = petersburgMatch ? "Санкт-Петербург" : "Москва";
   const search = searchParams.get("search") ?? "";
-  const city = searchParams.get("city") ?? "";
   const skillsParam =
     searchParams.get("skills") ?? "JavaScript,React,Redux,Python";
 
